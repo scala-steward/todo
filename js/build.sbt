@@ -1,10 +1,12 @@
 enablePlugins(ScalaJSPlugin)
 
-libraryDependencies += "com.thoughtworks.binding" %%% "dom" % "11.0.1"
+libraryDependencies += "org.lrng.binding" %%% "html" % "1.0.3"
 
-libraryDependencies += "com.thoughtworks.binding" %%% "route" % "11.0.1"
+libraryDependencies += "com.thoughtworks.binding" %%% "route" % "12.0.0"
 
-addCompilerPlugin("org.scalamacros" % "paradise" % "2.1.0" cross CrossVersion.full)
+libraryDependencies += "com.lihaoyi" %%% "upickle" % "1.4.3"
+
+scalacOptions += "-Ymacro-annotations"
 
 crossPaths := false
 
