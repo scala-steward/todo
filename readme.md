@@ -2,7 +2,7 @@
 
 [Binding.scala](https://github.com/ThoughtWorksInc/Binding.scala) is a data-binding framework for [Scala](http://www.scala-lang.org/), running on both JVM and [Scala.js](http://www.scala-js.org/).
 
-Binding.scala can be used as a **[reactive](https://en.wikipedia.org/wiki/Reactive_programming) web framework**.
+When combining with [html.scala](https://github.com/Atry/html.scala), Binding.scala can be used as a **[reactive](https://en.wikipedia.org/wiki/Reactive_programming) web framework**.
 It enables you use native XML literal syntax to create reactive DOM nodes,
 which are able to automatically change whenever the data source changes.
 
@@ -15,15 +15,15 @@ only one source file, 154 lines of code!
 /**
  * Returns a bindable HTML DOM tree.
  *
- * The `html"""..."""` interpolation enable two magics:
- *  1. XHTML literals to create DOM nodes
+ * The `html"""..."""` interpolation enables two magics:
+ *  1. HTML literals to create DOM nodes
  *  2. `xxx.bind` syntax, which makes this DOM tree keep updated whenever `xxx` changes.
  */
-def render = {
+def rootView = {
   val value = Var("")
   html"""<div>
-    <input onchange={ event: Event => dom.currentTarget.asInstanceOf[HTMLInputElement].value }/>
-    Your input value is { value.bind }
+    <input onchange=${ (event: Event) => event.currentTarget.asInstanceOf[HTMLInputElement].value }/>
+    Your input value is ${ value.bind }
   </div>"""
 }
 
@@ -31,7 +31,7 @@ def render = {
  * Renders a bindable HTML DOM node into the body of current web page.
  */
 @JSExport def main(): Unit = {
-  render(document.body, render)
+  render(document.body, rootView)
 }
 ```
 
@@ -50,3 +50,4 @@ def render = {
 * [API documentation](https://javadoc.io/page/com.thoughtworks.binding/unidoc_2.11/latest/com/thoughtworks/binding/package.html)
 * [Other live DEMOs](https://thoughtworksinc.github.io/Binding.scala/)
 * [Chat on Gitter](https://gitter.im/ThoughtWorksInc/Binding.scala)
+* [html.scala](https://github.com/Atry/html.scala)
